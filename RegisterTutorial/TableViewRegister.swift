@@ -37,12 +37,14 @@ class TableViewRegister: UIView {
         tableviewR.register(TableViewCellRegister.self, forCellReuseIdentifier: "cell")
     }
     func addConstraintsRegisterView()  {
-        NSLayoutConstraint.activate([
-            tableviewR.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            tableviewR.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            tableviewR.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            tableviewR.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
-            ])
+        tableviewR.cBuild(make: .fillSuperview)
+        
+//        NSLayoutConstraint.activate([
+//            tableviewR.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+//            tableviewR.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+//            tableviewR.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+//            tableviewR.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+//            ])
         
     }
     

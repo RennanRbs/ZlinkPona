@@ -16,6 +16,8 @@
 		E89C62AD2322DE96000DFB98 /* TableViewRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89C62AC2322DE96000DFB98 /* TableViewRegister.swift */; };
 		E89C62AF23230715000DFB98 /* TableViewCellRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89C62AE23230715000DFB98 /* TableViewCellRegister.swift */; };
 		E89C62B123231C9B000DFB98 /* MockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89C62B023231C9B000DFB98 /* MockCell.swift */; };
+		EDACD0FF234AE1540029A35B /* LayoutAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDACD0FD234AE1540029A35B /* LayoutAnchor.swift */; };
+		EDACD100234AE1540029A35B /* CBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDACD0FE234AE1540029A35B /* CBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,8 @@
 		E89C62AC2322DE96000DFB98 /* TableViewRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewRegister.swift; sourceTree = "<group>"; };
 		E89C62AE23230715000DFB98 /* TableViewCellRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellRegister.swift; sourceTree = "<group>"; };
 		E89C62B023231C9B000DFB98 /* MockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCell.swift; sourceTree = "<group>"; };
+		EDACD0FD234AE1540029A35B /* LayoutAnchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutAnchor.swift; sourceTree = "<group>"; };
+		EDACD0FE234AE1540029A35B /* CBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,7 @@
 		E89C62802322DB5D000DFB98 = {
 			isa = PBXGroup;
 			children = (
+				EDACD0FC234AE1540029A35B /* CBuilder */,
 				E89C628B2322DB5E000DFB98 /* RegisterTutorial */,
 				E89C62A02322DB61000DFB98 /* RegisterTutorialUITests */,
 				E89C628A2322DB5E000DFB98 /* Products */,
@@ -103,6 +108,15 @@
 				E89C62A32322DB61000DFB98 /* Info.plist */,
 			);
 			path = RegisterTutorialUITests;
+			sourceTree = "<group>";
+		};
+		EDACD0FC234AE1540029A35B /* CBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				EDACD0FD234AE1540029A35B /* LayoutAnchor.swift */,
+				EDACD0FE234AE1540029A35B /* CBuilder.swift */,
+			);
+			path = CBuilder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,7 +223,9 @@
 				E89C62AD2322DE96000DFB98 /* TableViewRegister.swift in Sources */,
 				E89C62AF23230715000DFB98 /* TableViewCellRegister.swift in Sources */,
 				E89C628F2322DB5E000DFB98 /* ViewController.swift in Sources */,
+				EDACD100234AE1540029A35B /* CBuilder.swift in Sources */,
 				E89C628D2322DB5E000DFB98 /* AppDelegate.swift in Sources */,
+				EDACD0FF234AE1540029A35B /* LayoutAnchor.swift in Sources */,
 				E89C62B123231C9B000DFB98 /* MockCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
