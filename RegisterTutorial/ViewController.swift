@@ -10,15 +10,19 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     // MARK: Properties
     let tableViewRegister = TableViewRegister()
     var mockResult: [MockCell] = [MockCell(image: #imageLiteral(resourceName: "zelda"), name: "Zelda"),MockCell(image: #imageLiteral(resourceName: "epona"), name: "Epona"),MockCell(image: #imageLiteral(resourceName: "link"), name: "Link")]
+    var filteredsMock: [MockCell] = []
     
     // MARK: Inicialization
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
         setupNavigation()
+        setupSearchController()
     }
     
     private func setupTable() {
@@ -28,24 +32,60 @@ class ViewController: UIViewController {
         self.view = self.tableViewRegister
     }
     
+    private func setupSearchController() {
+        // Setup the Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Candies"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
     private func setupNavigation() {
         self.title = "Table View"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.view.backgroundColor = .white
     }
+    
+    // MARK: - Private instance methods
+      
+    func searchBarIsEmpty() -> Bool {
+      // Returns true if the text is empty or nil
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func isFiltering() -> Bool {
+      return searchController.isActive && !searchBarIsEmpty()
+    }
+      
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+      filteredsMock = mockResult.filter({( mock : MockCell) -> Bool in
+        return mock.name.lowercased().contains(searchText.lowercased())
+      })
 
-
+      tableViewRegister.tableviewR.reloadData()
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering() {
+          return filteredsMock.count
+        }
+        
         return mockResult.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? TableViewCellRegister
-        cell?.mockField = mockResult[indexPath.row]
+        let mock: MockCell
+        if isFiltering() {
+            mock = filteredsMock[indexPath.row]
+        } else {
+            mock = mockResult[indexPath.row]
+        }
+        cell?.mockField = mock
         return cell ?? UITableViewCell()
     }
     
@@ -60,3 +100,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+extension ViewController: UISearchResultsUpdating {
+  // MARK: - UISearchResultsUpdating Delegate
+  func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+  }
+}
