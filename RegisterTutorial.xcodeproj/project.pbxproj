@@ -10,7 +10,6 @@
 		AB8770D3234D2B7200C8ACD9 /* CharCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8770D2234D2B7200C8ACD9 /* CharCollectionViewCell.swift */; };
 		E89C628D2322DB5E000DFB98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89C628C2322DB5E000DFB98 /* AppDelegate.swift */; };
 		E89C628F2322DB5E000DFB98 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89C628E2322DB5E000DFB98 /* ViewController.swift */; };
-		E89C62922322DB5E000DFB98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E89C62902322DB5E000DFB98 /* Main.storyboard */; };
 		E89C62942322DB61000DFB98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E89C62932322DB61000DFB98 /* Assets.xcassets */; };
 		E89C62972322DB61000DFB98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E89C62952322DB61000DFB98 /* LaunchScreen.storyboard */; };
 		E89C62A22322DB61000DFB98 /* RegisterTutorialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89C62A12322DB61000DFB98 /* RegisterTutorialUITests.swift */; };
@@ -32,7 +31,6 @@
 		E89C62892322DB5E000DFB98 /* RegisterTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RegisterTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89C628C2322DB5E000DFB98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E89C628E2322DB5E000DFB98 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E89C62912322DB5E000DFB98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E89C62932322DB61000DFB98 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E89C62962322DB61000DFB98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E89C62982322DB61000DFB98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 			files = (
 				E89C62972322DB61000DFB98 /* LaunchScreen.storyboard in Resources */,
 				E89C62942322DB61000DFB98 /* Assets.xcassets in Resources */,
-				E89C62922322DB5E000DFB98 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,14 +226,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E89C62902322DB5E000DFB98 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E89C62912322DB5E000DFB98 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E89C62952322DB61000DFB98 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -369,7 +358,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7SH46749RP;
+				DEVELOPMENT_TEAM = 4Q9SUUL4ZR;
 				INFOPLIST_FILE = RegisterTutorial/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -405,7 +394,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7SH46749RP;
+				DEVELOPMENT_TEAM = 4Q9SUUL4ZR;
 				INFOPLIST_FILE = RegisterTutorialUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -425,7 +414,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7SH46749RP;
+				DEVELOPMENT_TEAM = 4Q9SUUL4ZR;
 				INFOPLIST_FILE = RegisterTutorialUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

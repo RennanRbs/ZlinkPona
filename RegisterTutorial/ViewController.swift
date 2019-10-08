@@ -7,10 +7,11 @@
 //
 
 import UIKit
-
+  
 class ViewController: RegisterCollectionViewController {
     
     // MARK: Properties
+    let searchController = UISearchController(searchResultsController: nil)
     let mockResult = [(image: #imageLiteral(resourceName: "zelda"), name: "Zelda"), (image: #imageLiteral(resourceName: "epona"), name: "Epona"), (image: #imageLiteral(resourceName: "link"), name: "Link")]
     
     // MARK: Inicialization
@@ -20,8 +21,40 @@ class ViewController: RegisterCollectionViewController {
         charCollectionView.dataSource = self
         
         setupCollectionViewConstraints()
+        setupSearchController()
     }
-
+    
+    private func setupSearchController() {
+        // Setup the Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Candies"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    private func setupNavigation() {
+        self.title = "Table View"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.view.backgroundColor = .white
+    }
+    
+    // MARK: - Private instance methods
+      
+    func searchBarIsEmpty() -> Bool {
+      // Returns true if the text is empty or nil
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func isFiltering() -> Bool {
+      return searchController.isActive && !searchBarIsEmpty()
+    }
+      
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+      filteredsMock = mockResult.filter({( mock : MockCell) -> Bool in
+        return mock.name.lowercased().contains(searchText.lowercased())
+      })
+    }
 }
 
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -60,3 +93,9 @@ extension ViewController {
     }
 }
 
+extension ViewController: UISearchResultsUpdating {
+  // MARK: - UISearchResultsUpdating Delegate
+  func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+  }
+}
