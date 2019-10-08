@@ -8,39 +8,55 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    
+class ViewController: RegisterCollectionViewController {
     
     // MARK: Properties
-    let tableViewRegister = TableViewRegister()
-    let mockResult: [MockCell] = [MockCell(image: #imageLiteral(resourceName: "zelda"), name: "Zelda"),MockCell(image: #imageLiteral(resourceName: "epona"), name: "Epona"),MockCell(image: #imageLiteral(resourceName: "link"), name: "Link")]
+    let mockResult = [(image: #imageLiteral(resourceName: "zelda"), name: "Zelda"), (image: #imageLiteral(resourceName: "epona"), name: "Epona"), (image: #imageLiteral(resourceName: "link"), name: "Link")]
     
     // MARK: Inicialization
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewRegister.tableviewR.delegate = self as? UITableViewDelegate
-        tableViewRegister.tableviewR.dataSource = self
-        tableViewRegister.tableviewR.register(TableViewCellRegister.self, forCellReuseIdentifier: "Cell")
-        self.view = self.tableViewRegister
-         
+        charCollectionView.delegate = self
+        charCollectionView.dataSource = self
+        
+        setupCollectionViewConstraints()
     }
-
 
 }
 
-extension ViewController: UITabBarDelegate, UITableViewDataSource {
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return mockResult.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? TableViewCellRegister
-        cell?.mockField = mockResult[indexPath.row]
-        return cell ?? UITableViewCell()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = charCollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CharactersCollectionViewCell
+        cell.nameLabel.text = self.mockResult[indexPath.row].name
+        cell.charImageView.image = self.mockResult[indexPath.row].image
+        return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemSize = (collectionView.frame.width - (collectionView.contentInset.left + collectionView.contentInset.right + 10))
+        
+        return CGSize(width: itemSize, height: itemSize)
+    }
     
+}
+
+
+extension ViewController {
+    
+    func setupCollectionViewConstraints() {
+        self.view.addSubview(self.charCollectionView)
+    
+        NSLayoutConstraint.activate([
+            charCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            charCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            charCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            charCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+        ])
+    }
 }
 
