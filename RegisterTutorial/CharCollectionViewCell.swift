@@ -10,6 +10,8 @@ import UIKit
 
 class CharactersCollectionViewCell: UICollectionViewCell {
     
+
+    \\ MARK: Properties
     lazy var charImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "placeholder")
@@ -34,7 +36,20 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    func setupComponentsInCell() {
+    \\ MARK: Initialization
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setupComponentsInCell()
+        self.configCollectionCell()
+        
+    }
+        required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not benn implemented")
+    }
+    
+
+    \\ MARK: Functions
+        func setupComponentsInCell() {
         self.addSubview(self.charImageView)
         self.charImageView.addSubview(self.blurView)
         self.blurView.addSubview(self.nameLabel)
@@ -48,13 +63,6 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
     }
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.setupComponentsInCell()
-        self.configCollectionCell()
-        
-    }
-    
     private func configCollectionCell(){
         self.contentView.layer.cornerRadius = 4.0
         self.contentView.layer.borderWidth = 1.0
@@ -69,9 +77,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.contentView.layer.cornerRadius).cgPath
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not benn implemented")
-    }
+
     
 }
 

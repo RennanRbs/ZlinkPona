@@ -78,7 +78,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     
 }
 
-
+  \\ MARK: Extensions 
 extension ViewController {
     
     func setupCollectionViewConstraints() {
