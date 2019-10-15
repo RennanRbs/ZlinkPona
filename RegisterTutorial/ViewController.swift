@@ -13,6 +13,15 @@ class ViewController: RegisterCollectionViewController {
     // MARK: Properties
     let searchController = UISearchController(searchResultsController: nil)
     let mockResult = [(image: #imageLiteral(resourceName: "zelda"), name: "Zelda"), (image: #imageLiteral(resourceName: "epona"), name: "Epona"), (image: #imageLiteral(resourceName: "link"), name: "Link")]
+    var filteredMock: [(UIImage, String)] = []
+    
+    var isSearchControllerEmpty: Bool {
+        return searchController.searchBar.text!.isEmpty
+    }
+    
+    var isFiltering: Bool {
+        return searchController.isActive && !isSearchControllerEmpty
+    }
     
     // MARK: Inicialization
     override func viewDidLoad() {
@@ -28,7 +37,7 @@ class ViewController: RegisterCollectionViewController {
         // Setup the Search Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Candies"
+        searchController.searchBar.placeholder = "Search Chars"
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
@@ -39,34 +48,39 @@ class ViewController: RegisterCollectionViewController {
         self.view.backgroundColor = .white
     }
     
-    // MARK: - Private instance methods
-      
-    func searchBarIsEmpty() -> Bool {
-      // Returns true if the text is empty or nil
-      return searchController.searchBar.text?.isEmpty ?? true
-    }
-    
-    func isFiltering() -> Bool {
-      return searchController.isActive && !searchBarIsEmpty()
-    }
+    // MARK: - Private instance method
       
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-      filteredsMock = mockResult.filter({( mock : MockCell) -> Bool in
-        return mock.name.lowercased().contains(searchText.lowercased())
-      })
+        filteredMock = mockResult.filter({ (image, name) -> Bool in
+            return name.lowercased().contains(searchText.lowercased())
+        })
+        
+        self.charCollectionView.reloadData()
     }
 }
 
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if isFiltering {
+            return filteredMock.count
+        }
         return mockResult.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = charCollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CharactersCollectionViewCell
-        cell.nameLabel.text = self.mockResult[indexPath.row].name
-        cell.charImageView.image = self.mockResult[indexPath.row].image
+        
+        let mock: (image: UIImage, name: String)
+        
+        if isFiltering {
+            mock = mockResult[indexPath.row]
+        } else {
+            mock = mockResult[indexPath.row]
+        }
+        
+        cell.nameLabel.text = mock.name
+        cell.charImageView.image = mock.image
         return cell
     }
     
@@ -78,7 +92,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     
 }
 
-  \\ MARK: Extensions 
+  
 extension ViewController {
     
     func setupCollectionViewConstraints() {
