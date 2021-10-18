@@ -9,10 +9,10 @@
 import UIKit
   
 class ViewController: RegisterCollectionViewController {
-    
+
     // MARK: Properties
     let searchController = UISearchController(searchResultsController: nil)
-    let mockResult = [(image: #imageLiteral(resourceName: "zelda"), name: "Zelda"), (image: #imageLiteral(resourceName: "epona"), name: "Epona"), (image: #imageLiteral(resourceName: "link"), name: "Link")]
+    var mockResult = [(image: #imageLiteral(resourceName: "zelda"), name: "Zelda"), (image: #imageLiteral(resourceName: "epona"), name: "Epona"), (image: #imageLiteral(resourceName: "link"), name: "Link")]
     
     // MARK: Inicialization
     override func viewDidLoad() {
@@ -51,7 +51,14 @@ class ViewController: RegisterCollectionViewController {
     }
       
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        let filteredsMock = mockResult.filter({$1.lowercased().contains(searchText.lowercased())})
+        
+        if searchText.isEmpty {
+            mockResult = [(image: #imageLiteral(resourceName: "zelda"), name: "Zelda"), (image: #imageLiteral(resourceName: "epona"), name: "Epona"), (image: #imageLiteral(resourceName: "link"), name: "Link")]
+        } else {
+            mockResult = mockResult.filter({$1.lowercased().contains(searchText.lowercased())})
+        }
+        
+        charCollectionView.reloadData()
     }
 }
 
