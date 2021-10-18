@@ -14,24 +14,15 @@ class CharactersCollectionViewCell: UICollectionViewCell {
 //  MARK: Properties
     lazy var charImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "placeholder")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-    }()
-
-    lazy var blurView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.35)
-        return view
     }()
     
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Char Name"
-        label.textColor = .white
-        label.textAlignment = .left
+        label.textColor = .black
+        label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
@@ -50,12 +41,10 @@ class CharactersCollectionViewCell: UICollectionViewCell {
 
     // MARK: Functions
         func setupComponentsInCell() {
-        self.addSubview(self.charImageView)
-        self.charImageView.addSubview(self.blurView)
-        self.blurView.addSubview(self.nameLabel)
+        self.contentView.addSubview(self.charImageView)
+        self.contentView.addSubview(self.nameLabel)
         setupCellAdjustment()
         self.setupImageViewConstraints()
-        self.setupBlurViewConstraints()
         self.setupNameLabelConstraints()
     }
     
@@ -63,7 +52,9 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
     }
+    
     private func configCollectionCell(){
+        self.contentView.backgroundColor = .white
         self.contentView.layer.cornerRadius = 4.0
         self.contentView.layer.borderWidth = 1.0
         self.contentView.layer.borderColor = UIColor.clear.cgColor
@@ -77,30 +68,27 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.contentView.layer.cornerRadius).cgPath
     }
     
-
-    
+    public func setupCell(char: Character) {
+        nameLabel.text = char.name
+        charImageView.image = char.image
+    }
 }
 
 
 extension CharactersCollectionViewCell {
     
-    func setupNameLabelConstraints() {
-        self.nameLabel.leadingAnchor.constraint(equalTo: self.blurView.leadingAnchor, constant: 12).isActive = true
-        self.nameLabel.trailingAnchor.constraint(equalTo: self.blurView.trailingAnchor, constant: -12).isActive = true
-        self.nameLabel.centerYAnchor.constraint(equalTo: self.blurView.centerYAnchor).isActive = true
-    }
-    
-    func setupBlurViewConstraints() {
-        self.blurView.leadingAnchor.constraint(equalTo: self.charImageView.leadingAnchor).isActive = true
-        self.blurView.trailingAnchor.constraint(equalTo: self.charImageView.trailingAnchor).isActive = true
-        self.blurView.bottomAnchor.constraint(equalTo: self.charImageView.bottomAnchor).isActive = true
-    }
-    
     func setupImageViewConstraints() {
-        self.charImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.charImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        self.charImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        self.charImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.charImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
+        self.charImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
+        self.charImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
+        self.charImageView.heightAnchor.constraint(equalTo: self.contentView.heightAnchor, multiplier: 0.8).isActive = true
+    }
+    
+    func setupNameLabelConstraints() {
+        self.nameLabel.topAnchor.constraint(equalTo: self.charImageView.bottomAnchor, constant: 6).isActive = true
+        self.nameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12).isActive = true
+        self.nameLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12).isActive = true
+        self.nameLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 6).isActive = true
     }
     
 }

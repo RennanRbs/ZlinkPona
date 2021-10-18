@@ -7,12 +7,23 @@
 //
 
 import UIKit
-  
-class ViewController: RegisterCollectionViewController {
+
+struct Character {
+    let image: UIImage
+    let name: String
     
+    static let mockedChars: [Character] = [
+        Character(image: UIImage(named: "epona")! , name: "Epona"),
+        Character(image: UIImage(named: "zelda")!, name: "Zelda"),
+        Character(image: UIImage(named: "link")!, name: "Link")
+    ]
+}
+
+class ViewController: RegisterCollectionViewController {
+
     // MARK: Properties
     let searchController = UISearchController(searchResultsController: nil)
-    let mockResult = [(image: #imageLiteral(resourceName: "zelda"), name: "Zelda"), (image: #imageLiteral(resourceName: "epona"), name: "Epona"), (image: #imageLiteral(resourceName: "link"), name: "Link")]
+    var model = Character.mockedChars
     
     // MARK: Inicialization
     override func viewDidLoad() {
@@ -51,20 +62,28 @@ class ViewController: RegisterCollectionViewController {
     }
       
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        let filteredsMock = mockResult.filter({$1.lowercased().contains(searchText.lowercased())})
+        
+        if searchText.isEmpty {
+            model = Character.mockedChars
+        } else {
+            model = model.filter({$0.name.lowercased().contains(searchText.lowercased())})
+        }
+        
+        charCollectionView.reloadData()
     }
 }
 
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mockResult.count
+        return model.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = charCollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CharactersCollectionViewCell
-        cell.nameLabel.text = self.mockResult[indexPath.row].name
-        cell.charImageView.image = self.mockResult[indexPath.row].image
+        guard let cell = charCollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? CharactersCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.setupCell(char: model[indexPath.row])
         return cell
     }
     
