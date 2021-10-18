@@ -51,9 +51,7 @@ class ViewController: RegisterCollectionViewController {
     }
       
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-      filteredsMock = mockResult.filter({( mock : MockCell) -> Bool in
-        return mock.name.lowercased().contains(searchText.lowercased())
-      })
+        let filteredsMock = mockResult.filter({$1.lowercased().contains(searchText.lowercased())})
     }
 }
 
@@ -78,7 +76,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     
 }
 
-  \\ MARK: Extensions 
+//   MARK: Extensions
 extension ViewController {
     
     func setupCollectionViewConstraints() {
