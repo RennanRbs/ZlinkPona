@@ -11,7 +11,7 @@ import UIKit
 class CharactersCollectionViewCell: UICollectionViewCell {
     
 
-    \\ MARK: Properties
+//  MARK: Properties
     lazy var charImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "placeholder")
@@ -36,7 +36,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    \\ MARK: Initialization
+    // MARK: Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupComponentsInCell()
@@ -48,7 +48,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     }
     
 
-    \\ MARK: Functions
+    // MARK: Functions
         func setupComponentsInCell() {
         self.addSubview(self.charImageView)
         self.charImageView.addSubview(self.blurView)
