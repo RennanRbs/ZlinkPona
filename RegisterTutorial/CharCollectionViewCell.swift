@@ -11,7 +11,8 @@ import UIKit
 class CharactersCollectionViewCell: UICollectionViewCell {
     
 
-//  MARK: Properties
+
+//    \\ MARK: Properties
     lazy var charImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,7 +28,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    // MARK: Initialization
+//    \\ MARK: Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupComponentsInCell()
@@ -39,7 +40,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     }
     
 
-    // MARK: Functions
+//    \\ MARK: Functions
         func setupComponentsInCell() {
         self.contentView.addSubview(self.charImageView)
         self.contentView.addSubview(self.nameLabel)
@@ -76,6 +77,18 @@ class CharactersCollectionViewCell: UICollectionViewCell {
 
 
 extension CharactersCollectionViewCell {
+    
+
+    func setupNameLabelConstraints() {
+//        self.nameLabel.leadingAnchor.constraint(equalTo: self.blurView.leadingAnchor, constant: 12).isActive = true
+//        self.nameLabel.trailingAnchor.constraint(equalTo: self.blurView.trailingAnchor, constant: -12).isActive = true
+//        self.nameLabel.centerYAnchor.constraint(equalTo: self.blurView.centerYAnchor).isActive = true
+        
+        NSLayoutConstraint.activate([
+            nameLabel.bottomAnchor.constraint(equalTo: blurView.bottomAnchor, constant: 20),
+            nameLabel.centerXAnchor.constraint(equalTo: blurView.centerXAnchor),
+        ])
+    }
     
     func setupImageViewConstraints() {
         self.charImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
