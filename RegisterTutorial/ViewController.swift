@@ -13,6 +13,7 @@ class ViewController: RegisterCollectionViewController {
     // MARK: Properties
     let searchController = UISearchController(searchResultsController: nil)
     let mockResult = [(image: #imageLiteral(resourceName: "zelda"), name: "Zelda"), (image: #imageLiteral(resourceName: "epona"), name: "Epona"), (image: #imageLiteral(resourceName: "link"), name: "Link")]
+    var filteredsMock: [(image: UIImage, name: String)] = []
     
     // MARK: Inicialization
     override func viewDidLoad() {
@@ -51,9 +52,9 @@ class ViewController: RegisterCollectionViewController {
     }
       
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-      filteredsMock = mockResult.filter({( mock : MockCell) -> Bool in
-        return mock.name.lowercased().contains(searchText.lowercased())
-      })
+//      filteredsMock = mockResult.filter({( mock : MockCell) -> Bool in
+//        return mock.name.lowercased().contains(searchText.lowercased())
+//      })
     }
 }
 
@@ -78,7 +79,6 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     
 }
 
-  \\ MARK: Extensions 
 extension ViewController {
     
     func setupCollectionViewConstraints() {
